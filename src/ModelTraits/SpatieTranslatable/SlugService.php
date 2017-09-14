@@ -47,7 +47,7 @@ class SlugService extends \Cviebrock\EloquentSluggable\Services\SlugService
      * @param string $attribute
      * @return string
      */
-    protected function makeSlugUnique($slug, array $config, $attribute)
+    protected function makeSlugUnique(string $slug, array $config, string $attribute): string
     {
         if (! $config['unique']) {
             return $slug;
