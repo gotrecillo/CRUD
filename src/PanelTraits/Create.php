@@ -112,10 +112,11 @@ trait Create
 
             if (isset($field['morph']) && $field['morph']) {
                 $values = isset($data[$field['name']]) ? $data[$field['name']] : [];
-                if ($model->{$field['name']}) {
-                    $model->{$field['name']}()->update($values);
-                } else {
-                    $model->{$field['name']}()->create($values);
+                foreach($values as $value) {
+                    $class = $field['model'];
+                    $class = new $class();
+                    $ref = $class::find($value);
+                    $model->{$field['name']}()->save($ref);
                 }
             }
         }
