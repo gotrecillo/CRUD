@@ -13,7 +13,7 @@ class SlugService extends \Cviebrock\EloquentSluggable\Services\SlugService
      * @param bool $force
      * @return bool
      */
-    public function slug(Model $model, $force = false)
+    public function slug(Model $model, bool $force = false): bool
     {
         $this->setModel($model);
 
