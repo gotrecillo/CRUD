@@ -43,7 +43,7 @@ class SluggableObserver extends \Cviebrock\EloquentSluggable\SluggableObserver
      * @param string $event
      * @return bool|null
      */
-    protected function generateSlug(Model $model, $event)
+    protected function generateSlug(Model $model, string $event)
     {
         // If the "slugging" event returns a value, abort
         if ($this->fireSluggingEvent($model, $event) !== null) {
