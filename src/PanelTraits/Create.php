@@ -112,12 +112,18 @@ trait Create
 
             if (isset($field['morph']) && $field['morph']) {
                 $values = isset($data[$field['name']]) ? $data[$field['name']] : [];
-                foreach($values as $value) {
-                    $class = $field['model'];
-                    $class = new $class();
-                    $ref = $class::find($value);
-                    $model->{$field['name']}()->save($ref);
-                }
+
+                $class = $field['model'];
+                $class = new $class();
+
+                $refs = collect($values)->map(function ($value) use ($class) {
+                    return $class::find($value);
+                })->filter(function ($value) {
+                    return $value;
+                });
+
+                $model->{$field['name']}()->sync([]);
+                $model->{$field['name']}()->saveMany($refs);
             }
         }
     }
