@@ -43,7 +43,7 @@ trait Sluggable
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFindSimilarSlugs(Builder $query, Model $model, $attribute, $config, $slug)
+    public function scopeFindSimilarSlugs(Builder $query, $attribute, $config, $slug)
     {
         $separator = $config['separator'];
         $attribute = $attribute.'->'.$this->getLocale();
